@@ -3,44 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HUB de Repaso - 3.º DS B</title>
+    <title>HUB Personal · Repaso 3.º DS B</title>
+    <!-- Google Fonts para tipografía moderna -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- Barra de navegación superior -->
-    <header>
-        <nav class="top-nav">
-            <span class="marca">HUB 3.º DS «B»</span>
-            <a href="#inicio">Inicio</a>
-            <a href="#modulos">Módulos</a>
-            <a href="#contacto">Equipo</a>
-        </nav>
+
+    <!-- Barra de navegación fija y moderna -->
+    <header class="navbar">
+        <div class="nav-container">
+            <span class="logo">⚡ HUB · 3.º DS B</span>
+            <nav class="nav-links">
+                <a href="#inicio">Inicio</a>
+                <a href="#modulos">Módulos</a>
+                <a href="#contacto">Contacto</a>
+            </nav>
+        </div>
     </header>
 
-    <!-- Sección de Portada (Hero) -->
+    <!-- Sección Principal (Hero) -->
     <main>
-        <section id="inicio" class="hero">
-            <h1>Portal de Repaso y Cimientos del Año</h1>
-            <p>Bienvenido al centro de recursos educativos del equipo. Aquí encontrarás todos los módulos desarrollados.</p>
-            <a href="#modulos" class="btn-principal">Ver Módulos</a>
+        <section id="inicio" class="hero fade-in">
+            <div class="hero-badge">🚀 Proyecto Individual de Repaso</div>
+            <h1>Construye el portal de tu año académico</h1>
+            <p>Repositorio personal enfocado en consolidar los conocimientos de desarrollo de software, estructurado paso a paso para el éxito profesional.</p>
+            <div class="hero-buttons">
+                <a href="#modulos" class="btn btn-primary">Explorar Módulos</a>
+                <a href="https://github.com" target="_blank" class="btn btn-secondary">Ver Repositorio</a>
+            </div>
         </section>
 
-        <!-- Sección de Lista de Módulos (Provisional) -->
-        <section id="modulos" class="bloque">
-            <h2>Nuestros Módulos</h2>
-            <div id="contenedor-modulos" class="grid-modulos">
-                <!-- Los módulos se cargarán aquí -->
-                <div class="card-modulo">
-                    <h3>Desarrollo de Software</h3>
-                    <p>Módulo base de programación y bases de datos.</p>
-                </div>
+        <!-- Sección de Módulos (Animada al scroll) -->
+        <section id="modulos" class="bloque fade-in">
+            <div class="section-title">
+                <h2>Mis Módulos de Estudio</h2>
+                <p>Estructura de aprendizajes y tecnologías aplicadas durante el año.</p>
+            </div>
+            
+            <div class="grid-modulos">
+                <article class="card-modulo">
+                    <div class="card-tag">Desarrollo</div>
+                    <h3>Aplicaciones .NET MAUI</h3>
+                    <p>Creación de interfaces multiplataforma conectadas a bases de datos SQLite locales.</p>
+                </article>
+
+                <article class="card-modulo">
+                    <div class="card-tag">Base de Datos</div>
+                    <h3>Gestión SQL y MySQL</h3>
+                    <p>Diseño de esquemas relacionales, consultas complejas y administración de motores de datos.</p>
+                </article>
+
+                <article class="card-modulo">
+                    <div class="card-tag">Web & Lógica</div>
+                    <h3>Arquitectura Frontend y Git</h3>
+                    <p>Control de versiones profesional, despliegue continuo en GitHub Pages y diseño UI adaptable.</p>
+                </article>
             </div>
         </section>
     </main>
 
     <!-- Pie de página -->
-    <footer>
-        <p>Instituto Nacional Cantón Lourdes (INDEL) · 3.º DS B</p>
+    <footer class="footer">
+        <p>Instituto Nacional Cantón Lourdes (INDEL) · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B»</p>
     </footer>
 
     <script src="js/app.js"></script>
