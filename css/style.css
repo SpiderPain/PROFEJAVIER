@@ -1,0 +1,114 @@
+/* Variables de diseño y colores globales */
+:root {
+    --bg-color: #070a15;
+    --panel-color: #0f1630;
+    --text-color: #e8edfb;
+    --accent-color: #22d3ee;
+    --muted-color: #9ba7ce;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Barra de navegación */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(15, 22, 48, 0.9);
+    border-bottom: 1px solid #222c55;
+    position: sticky;
+    top: 0;
+}
+
+.top-nav a {
+    color: var(--muted-color);
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-weight: 600;
+}
+
+.top-nav a:hover {
+    color: var(--accent-color);
+}
+
+.marca {
+    font-weight: bold;
+    color: var(--accent-color);
+    font-size: 1.2rem;
+}
+
+/* Portada (Hero) */
+.hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: radial-gradient(circle at center, rgba(34, 211, 238, 0.1), transparent 70%);
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    color: var(--muted-color);
+    max-width: 600px;
+    margin: 0 auto 2rem auto;
+}
+
+.btn-principal {
+    display: inline-block;
+    background: linear-gradient(135deg, #0891b2, var(--accent-color));
+    color: #04121a;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* Secciones y Tarjetas */
+.bloque {
+    padding: 3rem 2rem;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.grid-modulos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.card-modulo {
+    background-color: var(--panel-color);
+    border: 1px solid #222c55;
+    border-top: 3px solid var(--accent-color);
+    border-radius: 10px;
+    padding: 1.5rem;
+}
+
+.card-modulo h3 {
+    margin-bottom: 0.5rem;
+    color: var(--accent-color);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--muted-color);
+    border-top: 1px solid #222c55;
+    margin-top: 2rem;
+}
