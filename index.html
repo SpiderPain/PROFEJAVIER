@@ -1,164 +1,18 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUB Personal · Repaso 3.º DS B</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <style>
-        /* Estilos adicionales integrados para los filtros, buscador, modo claro/oscuro y quiz */
-        .filtros-container {
-            margin-bottom: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .input-busqueda {
-            flex: 1;
-            min-width: 260px;
-            padding: 0.75rem 1rem;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            background: var(--bg-card);
-            color: var(--text-main);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.95rem;
-            outline: none;
-            transition: var(--transition);
-        }
-        .input-busqueda:focus {
-            border-color: var(--accent);
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
-        .chips-docentes {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        .btn-filtro {
-            background: var(--bg-card);
-            color: var(--text-muted);
-            border: 1px solid var(--border-color);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .btn-filtro:hover {
-            color: var(--text-main);
-            border-color: var(--accent);
-        }
-        .btn-filtro.active {
-            background: var(--accent);
-            color: var(--bg-primary);
-            border-color: var(--accent);
-            box-shadow: 0 0 10px var(--accent-glow);
-        }
-        .card-docente {
-            font-size: 0.8rem;
-            color: var(--accent);
-            font-weight: 500;
-        }
-
-        /* Soporte para Modo Claro */
-        [data-theme="light"] {
-            --bg-primary: #f8fafc;
-            --bg-card: #ffffff;
-            --border-color: #e2e8f0;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --accent: #0284c7;
-            --accent-glow: rgba(2, 132, 199, 0.15);
-        }
-        body {
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        .btn-theme {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.4rem 0.8rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-family: 'Outfit', sans-serif;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            transition: var(--transition);
-        }
-        .btn-theme:hover {
-            border-color: var(--accent);
-        }
-
-        /* Estilos del Quiz */
-        .quiz-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        .quiz-opciones {
-            display: grid;
-            gap: 0.75rem;
-            margin: 1.5rem 0;
-        }
-        .quiz-btn-opcion {
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 0.85rem 1.2rem;
-            border-radius: 10px;
-            text-align: left;
-            font-size: 0.95rem;
-            font-family: 'Outfit', sans-serif;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        .quiz-btn-opcion:hover:not([disabled]) {
-            border-color: var(--accent);
-        }
-        .quiz-btn-opcion.correcta {
-            background: rgba(34, 197, 94, 0.15);
-            border-color: #22c55e;
-            color: #22c55e;
-        }
-        .quiz-btn-opcion.incorrecta {
-            background: rgba(239, 68, 68, 0.15);
-            border-color: #ef4444;
-            color: #ef4444;
-        }
-        .quiz-feedback {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-        }
-        .quiz-feedback.correcta {
-            background: rgba(34, 197, 94, 0.1);
-            color: #22c55e;
-        }
-        .quiz-feedback.incorrecta {
-            background: rgba(239, 68, 68, 0.1);
-            color: #ef4444;
-        }
-    </style>
 </head>
 <body>
 
     <!-- Navegación -->
     <header class="navbar">
         <div class="nav-container">
-            <span class="logo">⚡ HUB · 3.º DS B</span>
-            <nav class="nav-links" style="display: flex; align-items: center; gap: 1rem;">
+            <span class="logo">🎺 HUB · 3.º DS B</span>
+            <nav class="nav-links">
                 <a href="#inicio">Inicio</a>
                 <a href="#modulos">Módulos</a>
                 <a href="#quiz">Quiz</a>
@@ -170,9 +24,9 @@
     <main>
         <!-- Hero Section -->
         <section id="inicio" class="hero fade-in">
-            <div class="hero-badge">Proyecto Individual de Repaso · v0.5</div>
+            <div class="hero-badge">A 1930s Style Epic</div>
             <h1>Construye el portal de tu año académico</h1>
-            <p>Repositorio personal enfocado en consolidar los conocimientos de desarrollo de software, estructurado paso a paso para el éxito profesional.</p>
+            <p>Aqui verás todo lo que aprendí este Tercer año como Estudiante de Desarrollo de Software.</p>
             <div class="hero-buttons">
                 <a href="#modulos" class="btn btn-primary">Explorar Módulos</a>
             </div>
@@ -216,12 +70,12 @@
 
             <div class="quiz-box">
                 <div id="quiz-container">
-                    <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem;">
+                    <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; font-weight: bold;">
                         <span id="quiz-progreso">Pregunta 1 de 5</span>
                         <span id="quiz-puntos">Puntos: 0</span>
                     </div>
                     
-                    <h3 id="quiz-pregunta" style="margin-top: 1rem; font-size: 1.15rem;">Cargando pregunta...</h3>
+                    <h3 id="quiz-pregunta" style="margin-top: 1rem; font-size: 1.15rem; font-family: var(--font-heading);">Cargando pregunta...</h3>
                     
                     <div id="quiz-opciones" class="quiz-opciones"></div>
                     
@@ -231,8 +85,8 @@
                 </div>
 
                 <div id="quiz-resultado" style="display: none; text-align: center; padding: 1rem 0;">
-                    <h3>🎉 ¡Quiz Completado!</h3>
-                    <p id="quiz-puntaje-final" style="font-size: 1.2rem; margin: 1rem 0; color: var(--accent);"></p>
+                    <h3 style="font-family: var(--font-heading); color: var(--accent);">🎉 ¡Quiz Completado!</h3>
+                    <p id="quiz-puntaje-final" style="font-size: 1.2rem; margin: 1rem 0; color: var(--accent-gold); font-weight: bold;"></p>
                     <button id="btn-reiniciar-quiz" class="btn btn-primary">Intentar de Nuevo</button>
                 </div>
             </div>
@@ -250,22 +104,22 @@
     </dialog>
 
     <footer class="footer">
-        <p>Instituto Nacional Cantón Lourdes (INDEL) · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B»</p>
+        <p>°Kevin Ernesto Corpeño Castillo, Ayo Estudiante de Tercer Año :></p>
     </footer>
 
-    <!-- Cargar datos y script interactivo con buscador, modal, modo claro/oscuro y quiz -->
+    <!-- Cargar datos y script interactivo -->
     <script src="data/modulos.js"></script>
     <script>
     document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. MODO CLARO / OSCURO CON PERSISTENCIA ---
+        // --- 1. MODO CLARO / OSCURO (Con estilo vintage) ---
         const btnTheme = document.getElementById("btn-theme");
-        const themeGuardado = localStorage.getItem("theme") || "dark";
+        const themeGuardado = localStorage.getItem("theme") || "light";
         
         function aplicarTema(theme) {
             document.documentElement.setAttribute("data-theme", theme);
             localStorage.setItem("theme", theme);
             if (btnTheme) {
-                btnTheme.textContent = theme === "light" ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
+                btnTheme.textContent = theme === "dark" ? "☀️ Modo Sepia" : "🌙 Modo Noche";
             }
         }
 
@@ -274,7 +128,7 @@
         if (btnTheme) {
             btnTheme.addEventListener("click", () => {
                 const actual = document.documentElement.getAttribute("data-theme");
-                const nuevo = actual === "light" ? "dark" : "light";
+                const nuevo = actual === "dark" ? "light" : "dark";
                 aplicarTema(nuevo);
             });
         }
@@ -294,7 +148,7 @@
         function filtrarYRenderizarModulos() {
             if (!gridContainer || typeof modulosData === "undefined") return;
 
-            const texto = inputBusqueda.value.toLowerCase().trim();
+            const texto = inputBusqueda ? inputBusqueda.value.toLowerCase().trim() : "";
 
             const modulosFiltrados = modulosData.filter(modulo => {
                 const coincideDocente = (docenteSeleccionado === "todos") || 
@@ -309,9 +163,9 @@
 
             if (modulosFiltrados.length === 0) {
                 gridContainer.innerHTML = "";
-                msgSinResultados.style.display = "block";
+                if (msgSinResultados) msgSinResultados.style.display = "block";
             } else {
-                msgSinResultados.style.display = "none";
+                if (msgSinResultados) msgSinResultados.style.display = "none";
                 gridContainer.innerHTML = modulosFiltrados.map((modulo) => `
                     <article class="card-modulo" data-id="${modulo.id}">
                         <div class="card-header">
@@ -323,18 +177,17 @@
                     </article>
                 `).join('');
 
-                // Reasignar eventos de clic a las nuevas tarjetas generadas
                 document.querySelectorAll(".card-modulo").forEach((card, index) => {
                     card.addEventListener("click", () => abrirFicha(modulosFiltrados[index]));
                 });
             }
         }
 
-        // Función para mostrar la ficha completa del módulo en el Modal
         function abrirFicha(modulo) {
+            if (!modalBody || !modal) return;
             modalBody.innerHTML = `
-                <h2>${modulo.titulo}</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1rem;"><strong>Docente:</strong> ${modulo.docente} | <strong>Categoría:</strong> ${modulo.categoria}</p>
+                <h2 style="font-family: var(--font-heading); color: var(--accent); font-size: 1.4rem;">${modulo.titulo}</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem; font-weight: bold;"><strong>Docente:</strong> ${modulo.docente} | <strong>Categoría:</strong> ${modulo.categoria}</p>
                 <p>${modulo.resumen}</p>
 
                 <div class="ficha-seccion">
@@ -366,13 +219,11 @@
             modal.showModal();
         }
 
-        // Eventos del Modal
         if (btnCerrar) btnCerrar.addEventListener("click", () => modal.close());
         if (modal) modal.addEventListener("click", (e) => {
             if (e.target === modal) modal.close();
         });
 
-        // Eventos de Búsqueda y Filtros
         if (inputBusqueda) {
             inputBusqueda.addEventListener("input", filtrarYRenderizarModulos);
         }
@@ -472,7 +323,7 @@
             });
         }
 
-        // --- 4. Animaciones al Scroll (Intersection Observer) ---
+        // --- 4. ANIMACIONES AL SCROLL ---
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -484,7 +335,7 @@
 
         document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-        // Renderizado inicial
+        // Cargas iniciales
         filtrarYRenderizarModulos();
         cargarPreguntaQuiz();
     });
