@@ -4,70 +4,490 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUB Personal · Repaso 3.º DS B</title>
-    <!-- Google Fonts para tipografía moderna -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos adicionales integrados para los filtros, buscador, modo claro/oscuro y quiz */
+        .filtros-container {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .input-busqueda {
+            flex: 1;
+            min-width: 260px;
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            color: var(--text-main);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            outline: none;
+            transition: var(--transition);
+        }
+        .input-busqueda:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .chips-docentes {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        .btn-filtro {
+            background: var(--bg-card);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-filtro:hover {
+            color: var(--text-main);
+            border-color: var(--accent);
+        }
+        .btn-filtro.active {
+            background: var(--accent);
+            color: var(--bg-primary);
+            border-color: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .card-docente {
+            font-size: 0.8rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* Soporte para Modo Claro */
+        [data-theme="light"] {
+            --bg-primary: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent: #0284c7;
+            --accent-glow: rgba(2, 132, 199, 0.15);
+        }
+        body {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .btn-theme {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-family: 'Outfit', sans-serif;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: var(--transition);
+        }
+        .btn-theme:hover {
+            border-color: var(--accent);
+        }
+
+        /* Estilos del Quiz */
+        .quiz-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .quiz-opciones {
+            display: grid;
+            gap: 0.75rem;
+            margin: 1.5rem 0;
+        }
+        .quiz-btn-opcion {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.85rem 1.2rem;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 0.95rem;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .quiz-btn-opcion:hover:not([disabled]) {
+            border-color: var(--accent);
+        }
+        .quiz-btn-opcion.correcta {
+            background: rgba(34, 197, 94, 0.15);
+            border-color: #22c55e;
+            color: #22c55e;
+        }
+        .quiz-btn-opcion.incorrecta {
+            background: rgba(239, 68, 68, 0.15);
+            border-color: #ef4444;
+            color: #ef4444;
+        }
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .quiz-feedback.correcta {
+            background: rgba(34, 197, 94, 0.1);
+            color: #22c55e;
+        }
+        .quiz-feedback.incorrecta {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Barra de navegación fija y moderna -->
+    <!-- Navegación -->
     <header class="navbar">
         <div class="nav-container">
             <span class="logo">⚡ HUB · 3.º DS B</span>
-            <nav class="nav-links">
+            <nav class="nav-links" style="display: flex; align-items: center; gap: 1rem;">
                 <a href="#inicio">Inicio</a>
                 <a href="#modulos">Módulos</a>
-                <a href="#contacto">Contacto</a>
+                <a href="#quiz">Quiz</a>
+                <button id="btn-theme" class="btn-theme" title="Cambiar tema">🌙 Modo Oscuro</button>
             </nav>
         </div>
     </header>
 
-    <!-- Sección Principal (Hero) -->
     <main>
+        <!-- Hero Section -->
         <section id="inicio" class="hero fade-in">
-            <div class="hero-badge">🚀 Proyecto Individual de Repaso</div>
+            <div class="hero-badge">Proyecto Individual de Repaso · v0.5</div>
             <h1>Construye el portal de tu año académico</h1>
             <p>Repositorio personal enfocado en consolidar los conocimientos de desarrollo de software, estructurado paso a paso para el éxito profesional.</p>
             <div class="hero-buttons">
                 <a href="#modulos" class="btn btn-primary">Explorar Módulos</a>
-                <a href="https://github.com" target="_blank" class="btn btn-secondary">Ver Repositorio</a>
             </div>
         </section>
 
-        <!-- Sección de Módulos (Animada al scroll) -->
+        <!-- Contenedor Dinámico de Módulos con Buscador y Filtros -->
         <section id="modulos" class="bloque fade-in">
             <div class="section-title">
                 <h2>Mis Módulos de Estudio</h2>
-                <p>Estructura de aprendizajes y tecnologías aplicadas durante el año.</p>
+                <p>Busca por número, nombre o filtra por docente en tiempo real.</p>
             </div>
             
-            <div class="grid-modulos">
-                <article class="card-modulo">
-                    <div class="card-tag">Desarrollo</div>
-                    <h3>Aplicaciones .NET MAUI</h3>
-                    <p>Creación de interfaces multiplataforma conectadas a bases de datos SQLite locales.</p>
-                </article>
+            <!-- Barra de Búsqueda y Filtros -->
+            <div class="filtros-container">
+                <input 
+                    type="text" 
+                    id="input-busqueda" 
+                    class="input-busqueda" 
+                    placeholder="Buscar módulo (ej: 3, 3.0, base de datos, ingles)..."
+                >
+                <div class="chips-docentes">
+                    <button type="button" class="btn-filtro active" data-docente="todos">Todos</button>
+                    <button type="button" class="btn-filtro" data-docente="Javier Mineros">Javier Mineros</button>
+                    <button type="button" class="btn-filtro" data-docente="Francisco Arcides">Francisco Arcides</button>
+                </div>
+            </div>
 
-                <article class="card-modulo">
-                    <div class="card-tag">Base de Datos</div>
-                    <h3>Gestión SQL y MySQL</h3>
-                    <p>Diseño de esquemas relacionales, consultas complejas y administración de motores de datos.</p>
-                </article>
+            <!-- Mensaje sin resultados -->
+            <p id="sin-resultados" style="display: none; color: var(--text-muted); text-align: center; margin: 2rem 0;">No se encontraron módulos que coincidan con la búsqueda.</p>
 
-                <article class="card-modulo">
-                    <div class="card-tag">Web & Lógica</div>
-                    <h3>Arquitectura Frontend y Git</h3>
-                    <p>Control de versiones profesional, despliegue continuo en GitHub Pages y diseño UI adaptable.</p>
-                </article>
+            <!-- Grid donde se pintan las tarjetas -->
+            <div id="grid-modulos" class="grid-modulos"></div>
+        </section>
+
+        <!-- Sección de Quiz Interactivo -->
+        <section id="quiz" class="bloque fade-in">
+            <div class="section-title">
+                <h2>Quiz de Repaso Académico</h2>
+                <p>Pon a prueba tus conocimientos sobre los módulos del año.</p>
+            </div>
+
+            <div class="quiz-box">
+                <div id="quiz-container">
+                    <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem;">
+                        <span id="quiz-progreso">Pregunta 1 de 5</span>
+                        <span id="quiz-puntos">Puntos: 0</span>
+                    </div>
+                    
+                    <h3 id="quiz-pregunta" style="margin-top: 1rem; font-size: 1.15rem;">Cargando pregunta...</h3>
+                    
+                    <div id="quiz-opciones" class="quiz-opciones"></div>
+                    
+                    <div id="quiz-feedback" class="quiz-feedback" style="display: none;"></div>
+                    
+                    <button id="btn-siguiente-quiz" class="btn btn-primary" style="display: none; margin-top: 1rem; width: 100%;">Siguiente Pregunta</button>
+                </div>
+
+                <div id="quiz-resultado" style="display: none; text-align: center; padding: 1rem 0;">
+                    <h3>🎉 ¡Quiz Completado!</h3>
+                    <p id="quiz-puntaje-final" style="font-size: 1.2rem; margin: 1rem 0; color: var(--accent);"></p>
+                    <button id="btn-reiniciar-quiz" class="btn btn-primary">Intentar de Nuevo</button>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Modal nativo (<dialog>) para la Ficha del Módulo -->
+    <dialog id="modal-ficha" class="modal-ficha">
+        <div class="modal-content">
+            <button id="btn-cerrar-modal" class="btn-cerrar">&times;</button>
+            <div id="modal-body">
+                <!-- Se llena dinámicamente al hacer clic en una tarjeta -->
+            </div>
+        </div>
+    </dialog>
+
     <footer class="footer">
         <p>Instituto Nacional Cantón Lourdes (INDEL) · 3.º Bachillerato Técnico Vocacional en Desarrollo de Software «B»</p>
     </footer>
 
-    <script src="js/app.js"></script>
+    <!-- Cargar datos y script interactivo con buscador, modal, modo claro/oscuro y quiz -->
+    <script src="data/modulos.js"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // --- 1. MODO CLARO / OSCURO CON PERSISTENCIA ---
+        const btnTheme = document.getElementById("btn-theme");
+        const themeGuardado = localStorage.getItem("theme") || "dark";
+        
+        function aplicarTema(theme) {
+            document.documentElement.setAttribute("data-theme", theme);
+            localStorage.setItem("theme", theme);
+            if (btnTheme) {
+                btnTheme.textContent = theme === "light" ? "☀️ Modo Claro" : "🌙 Modo Oscuro";
+            }
+        }
+
+        aplicarTema(themeGuardado);
+
+        if (btnTheme) {
+            btnTheme.addEventListener("click", () => {
+                const actual = document.documentElement.getAttribute("data-theme");
+                const nuevo = actual === "light" ? "dark" : "light";
+                aplicarTema(nuevo);
+            });
+        }
+
+        // --- 2. RENDERIZADO Y FILTRADO DE MÓDULOS ---
+        const gridContainer = document.getElementById("grid-modulos");
+        const inputBusqueda = document.getElementById("input-busqueda");
+        const btnsFiltro = document.querySelectorAll(".btn-filtro");
+        const msgSinResultados = document.getElementById("sin-resultados");
+        
+        const modal = document.getElementById("modal-ficha");
+        const modalBody = document.getElementById("modal-body");
+        const btnCerrar = document.getElementById("btn-cerrar-modal");
+
+        let docenteSeleccionado = "todos";
+
+        function filtrarYRenderizarModulos() {
+            if (!gridContainer || typeof modulosData === "undefined") return;
+
+            const texto = inputBusqueda.value.toLowerCase().trim();
+
+            const modulosFiltrados = modulosData.filter(modulo => {
+                const coincideDocente = (docenteSeleccionado === "todos") || 
+                                        (modulo.docente.toLowerCase() === docenteSeleccionado.toLowerCase());
+                
+                const coincideTexto = modulo.titulo.toLowerCase().includes(texto) ||
+                                      modulo.categoria.toLowerCase().includes(texto) ||
+                                      modulo.resumen.toLowerCase().includes(texto);
+
+                return coincideDocente && coincideTexto;
+            });
+
+            if (modulosFiltrados.length === 0) {
+                gridContainer.innerHTML = "";
+                msgSinResultados.style.display = "block";
+            } else {
+                msgSinResultados.style.display = "none";
+                gridContainer.innerHTML = modulosFiltrados.map((modulo) => `
+                    <article class="card-modulo" data-id="${modulo.id}">
+                        <div class="card-header">
+                            <span class="card-tag">${modulo.categoria}</span>
+                            <span class="card-docente">${modulo.docente}</span>
+                        </div>
+                        <h3>${modulo.titulo}</h3>
+                        <p>${modulo.resumen}</p>
+                    </article>
+                `).join('');
+
+                // Reasignar eventos de clic a las nuevas tarjetas generadas
+                document.querySelectorAll(".card-modulo").forEach((card, index) => {
+                    card.addEventListener("click", () => abrirFicha(modulosFiltrados[index]));
+                });
+            }
+        }
+
+        // Función para mostrar la ficha completa del módulo en el Modal
+        function abrirFicha(modulo) {
+            modalBody.innerHTML = `
+                <h2>${modulo.titulo}</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1rem;"><strong>Docente:</strong> ${modulo.docente} | <strong>Categoría:</strong> ${modulo.categoria}</p>
+                <p>${modulo.resumen}</p>
+
+                <div class="ficha-seccion">
+                    <h4>Lo que aprendí</h4>
+                    <ul>
+                        ${modulo.aprendizajes.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div class="ficha-seccion">
+                    <h4>Instrumentos & Evidencias</h4>
+                    <p><strong>Instrumentos:</strong> ${modulo.instrumentos.join(', ')}</p>
+                    <p><strong>Evidencia:</strong> ${modulo.evidencia}</p>
+                </div>
+
+                <div class="ficha-seccion">
+                    <h4>Programas & Herramientas</h4>
+                    <p><strong>Programas:</strong> ${modulo.programas.join(', ')}</p>
+                    <p><strong>Herramientas:</strong> ${modulo.herramientas.join(', ')}</p>
+                </div>
+
+                <div class="ficha-seccion">
+                    <h4>Recursos recomendados</h4>
+                    <ul>
+                        ${modulo.recursos.map(rec => `<li><a href="${rec.url}" target="_blank" rel="noopener">${rec.nombre}</a></li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            modal.showModal();
+        }
+
+        // Eventos del Modal
+        if (btnCerrar) btnCerrar.addEventListener("click", () => modal.close());
+        if (modal) modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.close();
+        });
+
+        // Eventos de Búsqueda y Filtros
+        if (inputBusqueda) {
+            inputBusqueda.addEventListener("input", filtrarYRenderizarModulos);
+        }
+
+        btnsFiltro.forEach(btn => {
+            btn.addEventListener("click", () => {
+                btnsFiltro.forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                docenteSeleccionado = btn.getAttribute("data-docente");
+                filtrarYRenderizarModulos();
+            });
+        });
+
+        // --- 3. LÓGICA DEL QUIZ INTERACTIVO ---
+        let preguntaActual = 0;
+        let puntaje = 0;
+
+        const quizProgreso = document.getElementById("quiz-progreso");
+        const quizPuntos = document.getElementById("quiz-puntos");
+        const quizPregunta = document.getElementById("quiz-pregunta");
+        const quizOpciones = document.getElementById("quiz-opciones");
+        const quizFeedback = document.getElementById("quiz-feedback");
+        const btnSiguienteQuiz = document.getElementById("btn-siguiente-quiz");
+        const quizContainer = document.getElementById("quiz-container");
+        const quizResultado = document.getElementById("quiz-resultado");
+        const quizPuntajeFinal = document.getElementById("quiz-puntaje-final");
+        const btnReiniciarQuiz = document.getElementById("btn-reiniciar-quiz");
+
+        function cargarPreguntaQuiz() {
+            if (typeof quizData === "undefined" || !quizPregunta) return;
+
+            const q = quizData[preguntaActual];
+            quizProgreso.textContent = `Pregunta ${preguntaActual + 1} de ${quizData.length}`;
+            quizPuntos.textContent = `Puntos: ${puntaje}`;
+            quizPregunta.textContent = q.pregunta;
+
+            quizOpciones.innerHTML = "";
+            quizFeedback.style.display = "none";
+            btnSiguienteQuiz.style.display = "none";
+
+            q.opciones.forEach((opcion, index) => {
+                const btn = document.createElement("button");
+                btn.classList.add("quiz-btn-opcion");
+                btn.textContent = opcion;
+                btn.addEventListener("click", () => seleccionarRespuestaQuiz(index));
+                quizOpciones.appendChild(btn);
+            });
+        }
+
+        function seleccionarRespuestaQuiz(indexSeleccionado) {
+            const q = quizData[preguntaActual];
+            const botones = quizOpciones.querySelectorAll(".quiz-btn-opcion");
+
+            botones.forEach(b => b.disabled = true);
+
+            if (indexSeleccionado === q.correcta) {
+                botones[indexSeleccionado].classList.add("correcta");
+                quizFeedback.className = "quiz-feedback correcta";
+                quizFeedback.textContent = "¡Correcto! " + q.explicacion;
+                puntaje += 2;
+            } else {
+                botones[indexSeleccionado].classList.add("incorrecta");
+                botones[q.correcta].classList.add("correcta");
+                quizFeedback.className = "quiz-feedback incorrecta";
+                quizFeedback.textContent = "Incorrecto. " + q.explicacion;
+            }
+
+            quizFeedback.style.display = "block";
+            btnSiguienteQuiz.style.display = "block";
+            quizPuntos.textContent = `Puntos: ${puntaje}`;
+        }
+
+        if (btnSiguienteQuiz) {
+            btnSiguienteQuiz.addEventListener("click", () => {
+                preguntaActual++;
+                if (preguntaActual < quizData.length) {
+                    cargarPreguntaQuiz();
+                } else {
+                    mostrarResultadoQuiz();
+                }
+            });
+        }
+
+        function mostrarResultadoQuiz() {
+            quizContainer.style.display = "none";
+            quizResultado.style.display = "block";
+            quizPuntajeFinal.textContent = `Puntaje final: ${puntaje} / ${quizData.length * 2} puntos.`;
+        }
+
+        if (btnReiniciarQuiz) {
+            btnReiniciarQuiz.addEventListener("click", () => {
+                preguntaActual = 0;
+                puntaje = 0;
+                quizResultado.style.display = "none";
+                quizContainer.style.display = "block";
+                cargarPreguntaQuiz();
+            });
+        }
+
+        // --- 4. Animaciones al Scroll (Intersection Observer) ---
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
+
+        // Renderizado inicial
+        filtrarYRenderizarModulos();
+        cargarPreguntaQuiz();
+    });
+    </script>
 </body>
 </html>
