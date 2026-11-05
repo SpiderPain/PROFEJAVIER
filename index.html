@@ -4,341 +4,306 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HUB Personal · Repaso 3.º DS B</title>
+    <meta name="description" content="Portal de repaso académico para 3.º Bachillerato Técnico Vocacional en Desarrollo de Software B - INDEL">
+    <meta name="theme-color" content="#c0392b">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- Fonts: Preload crítico -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Permanent+Marker&family=Rubik+Glitch&family=Outfit:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Permanent+Marker&family=Rubik+Glitch&family=Outfit:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+
+    <!-- Skip link para accesibilidad -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
 </head>
 <body>
 
-    <!-- Navegación -->
-    <header class="navbar">
+    <!-- ============================================================
+         DECORACIÓN LATERAL (solo escritorio, se oculta en móvil/tablet)
+         ============================================================ -->
+    <div class="side-decor" aria-hidden="true">
+
+        <!-- COLUMNA IZQUIERDA -->
+        <div class="side-decor__col side-decor__col--left">
+            <svg class="decor-svg decor-svg--cup" viewBox="0 0 140 175" focusable="false">
+                <g stroke="#1a1612" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M48 132 q-7 17 -14 23" fill="none"/>
+                    <path d="M76 132 q7 17 14 23" fill="none"/>
+                    <ellipse cx="26" cy="158" rx="14" ry="7" fill="#1a1612"/>
+                    <ellipse cx="98" cy="158" rx="14" ry="7" fill="#1a1612"/>
+                    <path d="M26 54 L33 130 Q62 143 91 130 L98 54 Z" fill="#fefaf3"/>
+                    <ellipse cx="62" cy="54" rx="36" ry="12" fill="#fffdf8"/>
+                    <path d="M78 47 q5 -23 18 -27" fill="none" stroke="#c0392b"/>
+                    <ellipse cx="48" cy="80" rx="11" ry="13" fill="#ffffff"/>
+                    <ellipse cx="76" cy="80" rx="11" ry="13" fill="#ffffff"/>
+                    <circle cx="51" cy="83" r="5" fill="#1a1612"/>
+                    <circle cx="79" cy="83" r="5" fill="#1a1612"/>
+                    <circle cx="62" cy="99" r="8" fill="#c0392b"/>
+                    <path d="M49 112 q13 11 26 0" fill="none"/>
+                    <path d="M97 72 q19 -5 21 11" fill="none"/>
+                    <circle cx="120" cy="90" r="12" fill="#fefaf3"/>
+                    <path d="M113 82 v-7 M120 81 v-8 M127 84 v-6" fill="none" stroke-width="3"/>
+                </g>
+            </svg>
+
+            <figure class="decor-frame">
+                <img src="https://upload.wikimedia.org/wikipedia/en/e/eb/Cuphead_%28artwork%29.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+                <figcaption>Cuphead</figcaption>
+            </figure>
+        </div>
+
+        <!-- COLUMNA DERECHA -->
+        <div class="side-decor__col side-decor__col--right">
+            <figure class="decor-frame">
+                <img src="https://upload.wikimedia.org/wikipedia/en/c/c8/Shovel_knight_cover.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+                <figcaption>Shovel Knight</figcaption>
+            </figure>
+
+            <svg class="decor-svg decor-svg--pad" viewBox="0 0 175 120" focusable="false">
+                <g stroke="#1a1612" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M42 36 q-24 0 -30 26 q-6 30 6 40 q11 8 23 -7 q10 -12 25 -12 h28 q15 0 25 12 q12 15 23 7 q12 -10 6 -40 q-6 -26 -30 -26 z" fill="#c0392b"/>
+                    <rect x="24" y="54" width="32" height="11" fill="#1a1612"/>
+                    <rect x="35" y="43" width="11" height="33" fill="#1a1612"/>
+                    <circle cx="122" cy="54" r="9" fill="#f1c40f"/>
+                    <circle cx="142" cy="70" r="9" fill="#f1c40f"/>
+                    <path d="M74 36 q7 -19 24 -19 q15 0 21 11" fill="none"/>
+                </g>
+            </svg>
+
+            <figure class="decor-frame decor-frame--wide">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Atari-2600-Wood-4Sw-Set.png/330px-Atari-2600-Wood-4Sw-Set.png" alt="" loading="lazy" onerror="this.parentNode.style.display='none'">
+                <figcaption>Atari 2600</figcaption>
+            </figure>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         NAVBAR INTELIGENTE CON PROGRESS BAR
+         ============================================================ -->
+    <header class="navbar navbar--visible" role="banner">
+        <div class="navbar-progress" aria-hidden="true"></div>
         <div class="nav-container">
-            <span class="logo">🎺 HUB · 3.º DS B</span>
-            <nav class="nav-links">
-                <a href="#inicio">Inicio</a>
-                <a href="#modulos">Módulos</a>
-                <a href="#quiz">Quiz</a>
-                <button id="btn-theme" class="btn-theme" title="Cambiar tema">🌙 Modo Oscuro</button>
+            <a href="#inicio" class="nav-logo" aria-label="HUB Personal - Inicio">🎺 HUB · 3.º DS B</a>
+
+            <nav class="nav-links" role="navigation" aria-label="Navegación principal">
+                <a href="#inicio" class="nav-link" data-section="inicio">Inicio</a>
+                <a href="#modulos" class="nav-link" data-section="modulos">Módulos</a>
+                <a href="#quiz" class="nav-link" data-section="quiz">Quiz</a>
+                <button id="btn-theme" class="btn-theme" title="Cambiar tema" aria-label="Alternar modo oscuro/claro">🌙 Modo Noche</button>
             </nav>
+
+            <!-- Mobile toggle -->
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Abrir menú">
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+                <span class="nav-toggle-line"></span>
+            </button>
         </div>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section id="inicio" class="hero fade-in">
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+    <main id="main-content" role="main">
+
+        <!-- HERO SECTION -->
+        <section id="inicio" class="hero scroll-reveal--pop" aria-labelledby="hero-title">
             <div class="hero-badge">A 1930s Style Epic</div>
-            <h1>Construye el portal de tu año académico</h1>
-            <p>Aqui verás todo lo que aprendí este Tercer año como Estudiante de Desarrollo de Software.</p>
-            <div class="hero-buttons">
-                <a href="#modulos" class="btn btn-primary">Explorar Módulos</a>
+            <h1 id="hero-title" class="hero-title scroll-reveal--lines">Construye el portal de tu año académico</h1>
+            <p class="hero-subtitle scroll-reveal--pop">Aquí verás todo lo que aprendí este tercer año como estudiante de Desarrollo de Software.</p>
+            <div class="hero-buttons scroll-reveal--pop">
+                <a href="#modulos" class="btn btn--primary btn--lg">Explorar Módulos</a>
+            </div>
+
+            <!-- Scroll indicator -->
+            <div class="scroll-indicator" aria-hidden="true">
+                <span>Explorar</span>
+                <div class="scroll-indicator-arrow"></div>
             </div>
         </section>
 
-        <!-- Contenedor Dinámico de Módulos con Buscador y Filtros -->
-        <section id="modulos" class="bloque fade-in">
-            <div class="section-title">
-                <h2>Mis Módulos de Estudio</h2>
-                <p>Busca por número, nombre o filtra por docente en tiempo real.</p>
+        <!-- MÓDULOS SECTION -->
+        <section id="modulos" class="section scroll-reveal" aria-labelledby="modulos-title">
+            <div class="section-header">
+                <h2 id="modulos-title" class="section-title">Mis Módulos de Estudio</h2>
+                <p class="section-subtitle">Busca por número, nombre o filtra por docente en tiempo real.</p>
             </div>
-            
-            <!-- Barra de Búsqueda y Filtros -->
-            <div class="filtros-container">
-                <input 
-                    type="text" 
-                    id="input-busqueda" 
-                    class="input-busqueda" 
-                    placeholder="Buscar módulo (ej: 3, 3.0, base de datos, ingles)..."
-                >
-                <div class="chips-docentes">
-                    <button type="button" class="btn-filtro active" data-docente="todos">Todos</button>
-                    <button type="button" class="btn-filtro" data-docente="Javier Mineros">Javier Mineros</button>
-                    <button type="button" class="btn-filtro" data-docente="Francisco Arcides">Francisco Arcides</button>
+
+            <!-- Filtros y Buscador -->
+            <div class="filters-bar scroll-reveal--slide-up">
+                <div class="search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/>
+                        <path d="M21 21l-4.3-4.3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input
+                        type="search"
+                        id="input-busqueda"
+                        class="search-input"
+                        placeholder="Buscar módulo (ej: 3, 3.0, base de datos, inglés)..."
+                        aria-label="Buscar módulos"
+                        autocomplete="off"
+                    >
+                </div>
+                <div class="filter-chips" role="group" aria-label="Filtrar por docente">
+                    <button type="button" class="filter-chip filter-chip--active" data-docente="todos" aria-pressed="true">Todos</button>
+                    <button type="button" class="filter-chip" data-docente="Javier Mineros" aria-pressed="false">Javier Mineros</button>
+                    <button type="button" class="filter-chip" data-docente="Francisco Arcides" aria-pressed="false">Francisco Arcides</button>
                 </div>
             </div>
 
             <!-- Mensaje sin resultados -->
-            <p id="sin-resultados" style="display: none; color: var(--text-muted); text-align: center; margin: 2rem 0;">No se encontraron módulos que coincidan con la búsqueda.</p>
+            <p id="sin-resultados" class="no-results" aria-live="polite">No se encontraron módulos que coincidan con la búsqueda.</p>
 
-            <!-- Grid donde se pintan las tarjetas -->
-            <div id="grid-modulos" class="grid-modulos"></div>
+            <!-- Grid de tarjetas -->
+            <div id="grid-modulos" class="modules-grid cards-grid scroll-stagger" data-stagger-delay="80" role="list" aria-label="Módulos de estudio"></div>
         </section>
 
-        <!-- Sección de Quiz Interactivo -->
-        <section id="quiz" class="bloque fade-in">
-            <div class="section-title">
-                <h2>Quiz de Repaso Académico</h2>
-                <p>Pon a prueba tus conocimientos sobre los módulos del año.</p>
+        <!-- QUIZ SECTION -->
+        <section id="quiz" class="section scroll-reveal" aria-labelledby="quiz-title">
+            <div class="section-header">
+                <h2 id="quiz-title" class="section-title">Quiz de Repaso Académico</h2>
+                <p class="section-subtitle">Pon a prueba tus conocimientos sobre los módulos del año.</p>
             </div>
 
-            <div class="quiz-box">
-                <div id="quiz-container">
-                    <div style="display: flex; justify-content: space-between; color: var(--text-muted); font-size: 0.9rem; font-weight: bold;">
-                        <span id="quiz-progreso">Pregunta 1 de 5</span>
-                        <span id="quiz-puntos">Puntos: 0</span>
+            <div class="quiz-box scroll-reveal--curtain" role="region" aria-label="Quiz interactivo">
+
+                <!-- PANTALLA DE INICIO -->
+                <div id="quiz-inicio" class="quiz-start">
+                    <div class="quiz-start-badge">🎬 1930s Quiz Show</div>
+                    <h3 class="quiz-start-title">Quiz de Repaso Académico</h3>
+                    <p class="quiz-start-subtitle">Prepárate antes de empezar. El cronómetro corre por pregunta, así que concéntrate.</p>
+
+                    <ul class="quiz-rules">
+                        <li class="quiz-rule">
+                            <span class="quiz-rule-icon">❓</span>
+                            <span class="quiz-rule-text"><strong>12 preguntas</strong> de todos los módulos del año, en orden aleatorio.</span>
+                        </li>
+                        <li class="quiz-rule">
+                            <span class="quiz-rule-icon">⏱️</span>
+                            <span class="quiz-rule-text"><strong>30 segundos</strong> por pregunta. Si se acaba el tiempo, se marca como fallada.</span>
+                        </li>
+                        <li class="quiz-rule">
+                            <span class="quiz-rule-icon">🔥</span>
+                            <span class="quiz-rule-text"><strong>Racha y puntos:</strong> responder rápido y en serie suma más puntos.</span>
+                        </li>
+                    </ul>
+
+                    <div class="quiz-start-actions">
+                        <button id="btn-empezar-quiz" class="btn btn--primary btn--lg">¡Empezar Quiz! 🎬</button>
+                        <button id="btn-volver-inicio" class="btn btn--secondary btn--sm" type="button">Volver al inicio</button>
                     </div>
-                    
-                    <h3 id="quiz-pregunta" style="margin-top: 1rem; font-size: 1.15rem; font-family: var(--font-heading);">Cargando pregunta...</h3>
-                    
-                    <div id="quiz-opciones" class="quiz-opciones"></div>
-                    
-                    <div id="quiz-feedback" class="quiz-feedback" style="display: none;"></div>
-                    
-                    <button id="btn-siguiente-quiz" class="btn btn-primary" style="display: none; margin-top: 1rem; width: 100%;">Siguiente Pregunta</button>
+                    <p class="quiz-start-note"> Puedes revisar las fichas de los módulos antes de empezar.</p>
                 </div>
 
-                <div id="quiz-resultado" style="display: none; text-align: center; padding: 1rem 0;">
-                    <h3 style="font-family: var(--font-heading); color: var(--accent);">🎉 ¡Quiz Completado!</h3>
-                    <p id="quiz-puntaje-final" style="font-size: 1.2rem; margin: 1rem 0; color: var(--accent-gold); font-weight: bold;"></p>
-                    <button id="btn-reiniciar-quiz" class="btn btn-primary">Intentar de Nuevo</button>
+                <div id="quiz-container" style="display: none;">
+                    <div class="quiz-header">
+                        <div class="quiz-progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progreso del quiz">
+                            <div id="quiz-progress-fill" class="quiz-progress-fill"></div>
+                        </div>
+                        <div class="quiz-stats">
+                            <div class="quiz-stat" id="quiz-progreso-stat">
+                                <span class="quiz-stat-icon">❓</span>
+                                <span class="quiz-stat-value" id="quiz-progreso">Pregunta 1 de 12</span>
+                            </div>
+                            <div class="quiz-stat" id="quiz-puntos-stat">
+                                <span class="quiz-stat-icon">⭐</span>
+                                <span class="quiz-stat-value" id="quiz-puntos">Puntos: 0</span>
+                            </div>
+                            <div class="quiz-stat quiz-streak" id="quiz-racha-stat">
+                                <span class="quiz-stat-icon">🔥</span>
+                                <span class="quiz-stat-value" id="quiz-racha">Racha: 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="quiz-timer" class="quiz-timer" aria-live="polite" aria-label="Tiempo restante"></div>
+
+                    <div class="quiz-meta">
+                        <span id="quiz-categoria" class="quiz-category"></span>
+                        <span id="quiz-dificultad" class="quiz-difficulty"></span>
+                    </div>
+
+                    <h3 id="quiz-pregunta" class="quiz-question">Cargando pregunta...</h3>
+
+                    <div id="quiz-opciones" class="quiz-options" role="group" aria-label="Opciones de respuesta"></div>
+
+                    <div id="quiz-feedback" class="quiz-feedback" role="alert" aria-live="assertive" style="display: none;"></div>
+
+                    <button id="btn-siguiente-quiz" class="btn btn--primary btn--block quiz-next-btn" style="display: none;">Siguiente Pregunta ➡️</button>
+                </div>
+
+                <div id="quiz-resultado" class="quiz-result" style="display: none;" aria-live="polite">
+                    <div id="quiz-puntaje-final"></div>
+
+                    <button id="btn-reiniciar-quiz" class="btn btn--primary btn--block btn--lg">Intentar de Nuevo 🔄</button>
                 </div>
             </div>
         </section>
+
     </main>
 
-    <!-- Modal nativo (<dialog>) para la Ficha del Módulo -->
-    <dialog id="modal-ficha" class="modal-ficha">
+    <!-- ============================================================
+         MODAL FICHA MÓDULO
+         ============================================================ -->
+    <dialog id="modal-ficha" class="modal-ficha" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-content">
-            <button id="btn-cerrar-modal" class="btn-cerrar">&times;</button>
+            <button id="btn-cerrar-modal" class="btn-cerrar" aria-label="Cerrar ficha del módulo">&times;</button>
+
+            <header class="modal-header">
+                <h2 id="modal-title" class="modal-title"></h2>
+                <div class="modal-meta" id="modal-meta"></div>
+            </header>
+
             <div id="modal-body">
-                <!-- Se llena dinámicamente al hacer clic en una tarjeta -->
+                <!-- Contenido dinámico -->
             </div>
         </div>
     </dialog>
 
-    <footer class="footer">
-        <p>°Kevin Ernesto Corpeño Castillo, Ayo Estudiante de Tercer Año :></p>
+    <!-- ============================================================
+         FOOTER
+         ============================================================ -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3 class="footer-title"><span class="footer-title-icon">✦</span> Autor</h3>
+                    <p class="footer-text"><strong>Kevin Ernesto Corpeño Castillo</strong></p>
+                    <p class="footer-text">Shawder / Kevin</p>
+                    <p class="footer-text footer-muted">3.º DS B · INDEL</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title"><span class="footer-title-icon">✉</span> Contacto</h3>
+                    <p class="footer-text"><a class="footer-link" href="mailto:19794982@clases.edu.sv">19794982@clases.edu.sv</a></p>
+                    <p class="footer-text footer-muted">Correo institucional</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3 class="footer-title"><span class="footer-title-icon">♥</span> Dedicatoria</h3>
+                    <p class="footer-text footer-dedication">A <strong>Dani</strong>, por la amistad y los buenos momentos.</p>
+                </div>
+            </div>
+
+            <div class="footer-decor" aria-hidden="true">
+                <span>✦</span>
+                <span>✧</span>
+                <span>✦</span>
+            </div>
+
+            <p class="footer-copy">HUB Personal · Repaso Académico 3.º DS B</p>
+        </div>
     </footer>
 
-    <!-- Cargar datos y script interactivo -->
+    <!-- ============================================================
+         SCRIPTS
+         ============================================================ -->
     <script src="data/modulos.js"></script>
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // --- 1. MODO CLARO / OSCURO (Con estilo vintage) ---
-        const btnTheme = document.getElementById("btn-theme");
-        const themeGuardado = localStorage.getItem("theme") || "light";
-        
-        function aplicarTema(theme) {
-            document.documentElement.setAttribute("data-theme", theme);
-            localStorage.setItem("theme", theme);
-            if (btnTheme) {
-                btnTheme.textContent = theme === "dark" ? "☀️ Modo Sepia" : "🌙 Modo Noche";
-            }
-        }
-
-        aplicarTema(themeGuardado);
-
-        if (btnTheme) {
-            btnTheme.addEventListener("click", () => {
-                const actual = document.documentElement.getAttribute("data-theme");
-                const nuevo = actual === "dark" ? "light" : "dark";
-                aplicarTema(nuevo);
-            });
-        }
-
-        // --- 2. RENDERIZADO Y FILTRADO DE MÓDULOS ---
-        const gridContainer = document.getElementById("grid-modulos");
-        const inputBusqueda = document.getElementById("input-busqueda");
-        const btnsFiltro = document.querySelectorAll(".btn-filtro");
-        const msgSinResultados = document.getElementById("sin-resultados");
-        
-        const modal = document.getElementById("modal-ficha");
-        const modalBody = document.getElementById("modal-body");
-        const btnCerrar = document.getElementById("btn-cerrar-modal");
-
-        let docenteSeleccionado = "todos";
-
-        function filtrarYRenderizarModulos() {
-            if (!gridContainer || typeof modulosData === "undefined") return;
-
-            const texto = inputBusqueda ? inputBusqueda.value.toLowerCase().trim() : "";
-
-            const modulosFiltrados = modulosData.filter(modulo => {
-                const coincideDocente = (docenteSeleccionado === "todos") || 
-                                        (modulo.docente.toLowerCase() === docenteSeleccionado.toLowerCase());
-                
-                const coincideTexto = modulo.titulo.toLowerCase().includes(texto) ||
-                                      modulo.categoria.toLowerCase().includes(texto) ||
-                                      modulo.resumen.toLowerCase().includes(texto);
-
-                return coincideDocente && coincideTexto;
-            });
-
-            if (modulosFiltrados.length === 0) {
-                gridContainer.innerHTML = "";
-                if (msgSinResultados) msgSinResultados.style.display = "block";
-            } else {
-                if (msgSinResultados) msgSinResultados.style.display = "none";
-                gridContainer.innerHTML = modulosFiltrados.map((modulo) => `
-                    <article class="card-modulo" data-id="${modulo.id}">
-                        <div class="card-header">
-                            <span class="card-tag">${modulo.categoria}</span>
-                            <span class="card-docente">${modulo.docente}</span>
-                        </div>
-                        <h3>${modulo.titulo}</h3>
-                        <p>${modulo.resumen}</p>
-                    </article>
-                `).join('');
-
-                document.querySelectorAll(".card-modulo").forEach((card, index) => {
-                    card.addEventListener("click", () => abrirFicha(modulosFiltrados[index]));
-                });
-            }
-        }
-
-        function abrirFicha(modulo) {
-            if (!modalBody || !modal) return;
-            modalBody.innerHTML = `
-                <h2 style="font-family: var(--font-heading); color: var(--accent); font-size: 1.4rem;">${modulo.titulo}</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1rem; font-weight: bold;"><strong>Docente:</strong> ${modulo.docente} | <strong>Categoría:</strong> ${modulo.categoria}</p>
-                <p>${modulo.resumen}</p>
-
-                <div class="ficha-seccion">
-                    <h4>Lo que aprendí</h4>
-                    <ul>
-                        ${modulo.aprendizajes.map(item => `<li>${item}</li>`).join('')}
-                    </ul>
-                </div>
-
-                <div class="ficha-seccion">
-                    <h4>Instrumentos & Evidencias</h4>
-                    <p><strong>Instrumentos:</strong> ${modulo.instrumentos.join(', ')}</p>
-                    <p><strong>Evidencia:</strong> ${modulo.evidencia}</p>
-                </div>
-
-                <div class="ficha-seccion">
-                    <h4>Programas & Herramientas</h4>
-                    <p><strong>Programas:</strong> ${modulo.programas.join(', ')}</p>
-                    <p><strong>Herramientas:</strong> ${modulo.herramientas.join(', ')}</p>
-                </div>
-
-                <div class="ficha-seccion">
-                    <h4>Recursos recomendados</h4>
-                    <ul>
-                        ${modulo.recursos.map(rec => `<li><a href="${rec.url}" target="_blank" rel="noopener">${rec.nombre}</a></li>`).join('')}
-                    </ul>
-                </div>
-            `;
-            modal.showModal();
-        }
-
-        if (btnCerrar) btnCerrar.addEventListener("click", () => modal.close());
-        if (modal) modal.addEventListener("click", (e) => {
-            if (e.target === modal) modal.close();
-        });
-
-        if (inputBusqueda) {
-            inputBusqueda.addEventListener("input", filtrarYRenderizarModulos);
-        }
-
-        btnsFiltro.forEach(btn => {
-            btn.addEventListener("click", () => {
-                btnsFiltro.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-                docenteSeleccionado = btn.getAttribute("data-docente");
-                filtrarYRenderizarModulos();
-            });
-        });
-
-        // --- 3. LÓGICA DEL QUIZ INTERACTIVO ---
-        let preguntaActual = 0;
-        let puntaje = 0;
-
-        const quizProgreso = document.getElementById("quiz-progreso");
-        const quizPuntos = document.getElementById("quiz-puntos");
-        const quizPregunta = document.getElementById("quiz-pregunta");
-        const quizOpciones = document.getElementById("quiz-opciones");
-        const quizFeedback = document.getElementById("quiz-feedback");
-        const btnSiguienteQuiz = document.getElementById("btn-siguiente-quiz");
-        const quizContainer = document.getElementById("quiz-container");
-        const quizResultado = document.getElementById("quiz-resultado");
-        const quizPuntajeFinal = document.getElementById("quiz-puntaje-final");
-        const btnReiniciarQuiz = document.getElementById("btn-reiniciar-quiz");
-
-        function cargarPreguntaQuiz() {
-            if (typeof quizData === "undefined" || !quizPregunta) return;
-
-            const q = quizData[preguntaActual];
-            quizProgreso.textContent = `Pregunta ${preguntaActual + 1} de ${quizData.length}`;
-            quizPuntos.textContent = `Puntos: ${puntaje}`;
-            quizPregunta.textContent = q.pregunta;
-
-            quizOpciones.innerHTML = "";
-            quizFeedback.style.display = "none";
-            btnSiguienteQuiz.style.display = "none";
-
-            q.opciones.forEach((opcion, index) => {
-                const btn = document.createElement("button");
-                btn.classList.add("quiz-btn-opcion");
-                btn.textContent = opcion;
-                btn.addEventListener("click", () => seleccionarRespuestaQuiz(index));
-                quizOpciones.appendChild(btn);
-            });
-        }
-
-        function seleccionarRespuestaQuiz(indexSeleccionado) {
-            const q = quizData[preguntaActual];
-            const botones = quizOpciones.querySelectorAll(".quiz-btn-opcion");
-
-            botones.forEach(b => b.disabled = true);
-
-            if (indexSeleccionado === q.correcta) {
-                botones[indexSeleccionado].classList.add("correcta");
-                quizFeedback.className = "quiz-feedback correcta";
-                quizFeedback.textContent = "¡Correcto! " + q.explicacion;
-                puntaje += 2;
-            } else {
-                botones[indexSeleccionado].classList.add("incorrecta");
-                botones[q.correcta].classList.add("correcta");
-                quizFeedback.className = "quiz-feedback incorrecta";
-                quizFeedback.textContent = "Incorrecto. " + q.explicacion;
-            }
-
-            quizFeedback.style.display = "block";
-            btnSiguienteQuiz.style.display = "block";
-            quizPuntos.textContent = `Puntos: ${puntaje}`;
-        }
-
-        if (btnSiguienteQuiz) {
-            btnSiguienteQuiz.addEventListener("click", () => {
-                preguntaActual++;
-                if (preguntaActual < quizData.length) {
-                    cargarPreguntaQuiz();
-                } else {
-                    mostrarResultadoQuiz();
-                }
-            });
-        }
-
-        function mostrarResultadoQuiz() {
-            quizContainer.style.display = "none";
-            quizResultado.style.display = "block";
-            quizPuntajeFinal.textContent = `Puntaje final: ${puntaje} / ${quizData.length * 2} puntos.`;
-        }
-
-        if (btnReiniciarQuiz) {
-            btnReiniciarQuiz.addEventListener("click", () => {
-                preguntaActual = 0;
-                puntaje = 0;
-                quizResultado.style.display = "none";
-                quizContainer.style.display = "block";
-                cargarPreguntaQuiz();
-            });
-        }
-
-        // --- 4. ANIMACIONES AL SCROLL ---
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
-
-        // Cargas iniciales
-        filtrarYRenderizarModulos();
-        cargarPreguntaQuiz();
-    });
-    </script>
+    <script src="js/app.js"></script>
 </body>
 </html>
