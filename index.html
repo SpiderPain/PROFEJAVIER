@@ -85,10 +85,15 @@
          ============================================================ -->
     <header class="navbar navbar--visible" role="banner">
         <div class="navbar-progress" aria-hidden="true"></div>
+        <button class="nav-overlay" id="nav-overlay" type="button" tabindex="-1" aria-label="Cerrar menú"></button>
         <div class="nav-container">
             <a href="#inicio" class="nav-logo" aria-label="HUB Personal - Inicio">🎺 HUB · 3.º DS B</a>
 
-            <nav class="nav-links" role="navigation" aria-label="Navegación principal">
+            <nav class="nav-links" id="nav-links" role="navigation" aria-label="Navegación principal">
+                <div class="nav-drawer-head">
+                    <span class="nav-drawer-title">Menú</span>
+                    <button class="nav-drawer-close" id="nav-drawer-close" type="button" aria-label="Cerrar menú">✕</button>
+                </div>
                 <a href="#inicio" class="nav-link" data-section="inicio">Inicio</a>
                 <a href="#modulos" class="nav-link" data-section="modulos">Módulos</a>
                 <a href="#quiz" class="nav-link" data-section="quiz">Quiz</a>

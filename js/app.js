@@ -553,19 +553,73 @@ const NavbarScroll = (() => {
         new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { nav.classList.remove('navbar--hidden', 'navbar--animating-hide'); nav.classList.add('navbar--visible', 'navbar--animating-show'); } }), { root: null, rootMargin: '0px', threshold: 0 }).observe(sentinel);
         window.addEventListener('scroll', onScroll, { passive: true });
         let touchY = 0; window.addEventListener('touchstart', e => touchY = e.touches[0].clientY, { passive: true }); window.addEventListener('touchmove', e => { const d = touchY - e.touches[0].clientY; if (Math.abs(d) > 30) { d > 0 ? hide() : show(); } }, { passive: true });
-        const toggle = $('.nav-toggle'), links = $('.nav-links'); if (toggle && links) { toggle.addEventListener('click', () => { const open = toggle.getAttribute('aria-expanded') === 'true'; toggle.setAttribute('aria-expanded', !open); links.classList.toggle('nav-links--open', !open); }); }
         update();
     }
 
     function onScroll() { lastY = window.scrollY; if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; } }
     function update() {
         const y = lastY; updateProgress(y);
+        if (document.body.classList.contains('nav-menu-open')) { show(); return; }
         if (y <= PEEK_TH) show(); else if (y > lastY && y > HIDE_TH) hide(); else if (y < lastY) show();
     }
     function show() { nav.classList.remove('navbar--hidden', 'navbar--animating-hide', 'navbar--peeking'); nav.classList.add('navbar--visible', 'navbar--animating-show'); }
     function hide() { nav.classList.remove('navbar--visible', 'navbar--animating-show', 'navbar--peeking'); nav.classList.add('navbar--hidden', 'navbar--animating-hide'); }
     function updateProgress(y) { const bar = nav.querySelector('.navbar-progress'); if (!bar) return; const dh = document.documentElement.scrollHeight - window.innerHeight; bar.style.transform = `scaleX(${dh > 0 ? Math.min(y / dh, 1) : 0})`; }
     return { init };
+})();
+
+// ============================================================
+// 6. MOBILE MENU (panel lateral con overlay)
+// ============================================================
+const MobileMenu = (() => {
+    let toggle, links, overlay, closeBtn, isOpen = false;
+
+    function cache() {
+        toggle = $('.nav-toggle');
+        links = $('.nav-links');
+        overlay = $('.nav-overlay');
+        closeBtn = $('.nav-drawer-close');
+    }
+
+    function openMenu() {
+        if (!toggle || !links) return;
+        isOpen = true;
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Cerrar menú');
+        links.classList.add('nav-links--open');
+        if (overlay) overlay.classList.add('nav-overlay--visible');
+        document.documentElement.classList.add('nav-menu-open');
+        document.body.classList.add('nav-menu-open');
+        if (closeBtn) closeBtn.focus({ preventScroll: true });
+    }
+
+    function closeMenu(returnFocus = true) {
+        if (!toggle || !links) return;
+        isOpen = false;
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Abrir menú');
+        links.classList.remove('nav-links--open');
+        if (overlay) overlay.classList.remove('nav-overlay--visible');
+        document.documentElement.classList.remove('nav-menu-open');
+        document.body.classList.remove('nav-menu-open');
+        if (returnFocus) toggle.focus({ preventScroll: true });
+    }
+
+    function toggleMenu() { isOpen ? closeMenu() : openMenu(); }
+
+    function init() {
+        cache();
+        if (!toggle || !links) return;
+        toggle.addEventListener('click', toggleMenu);
+        if (overlay) overlay.addEventListener('click', () => closeMenu());
+        if (closeBtn) closeBtn.addEventListener('click', () => closeMenu());
+        $$('.nav-link', links).forEach(link => link.addEventListener('click', () => closeMenu(false)));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) closeMenu(); });
+        window.addEventListener('resize', () => { if (isOpen && window.innerWidth > 768) closeMenu(false); });
+        window.addEventListener('orientationchange', () => { if (isOpen) closeMenu(false); });
+    }
+
+    return { init, open: openMenu, close: closeMenu, isOpen: () => isOpen };
 })();
 
 // ============================================================
@@ -620,6 +674,7 @@ function boot() {
     ModalModule.init();           // 1. Primero Modal
     ModulesModule.init(window.modulosData || []);  // 2. Luego Modules
     QuizUI.init(window.quizData || []);            // 3. Quiz
+    MobileMenu.init();
     NavbarScroll.init();
     ScrollAnimations.init();
 }
